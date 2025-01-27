@@ -1,0 +1,164 @@
+/* General Reset */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Joan&display=swap');
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    width: 100%;
+    height: 100%;
+    font-family: 'Inter', 'Joan', sans-serif;
+  }
+  
+  /* Dashboard Container */
+  .dashboard {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  /* Sidebar Styling */
+  .sidebar {
+    background-color: #007bff;
+    width: 20%;
+    min-width: 20%;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+  }
+  
+  .profile {
+    text-align: center;
+    margin-bottom: 40px;
+    font-family: 'Inter', sans-serif;
+    width: 100%;
+  }
+  
+  .profile-picture {
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    margin-bottom: 10px;
+  }
+  
+  .name {
+    font-size: 20px;
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .role {
+    font-size: 14px;
+    color: #ccc;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .menu {
+    width: 100%;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .menu-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .menu-item:hover,
+  .menu-item.active {
+    background-color: #302AF3;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  
+  .icon {
+    margin-right: 15px;
+  }
+  
+  /* Main Content Styling */
+  .main-content {
+    flex: 1;
+    background-color: #f8f9fa;
+    display: flex;
+    flex-direction: column;
+    width: 200vh;
+    font-family: 'Inter', sans-serif;
+  }
+  .petroxlogo{
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    width: 15%;
+   
+  }
+  button {
+    background-color:#302AF3;
+    color: white;
+    padding: 12px;
+    width: 20%;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif; 
+  }
+  .resul{
+    color: #0056b3;
+  }
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  .cal{
+    display: flex;
+    justify-content: space-around;
+    margin: auto;
+   
+    
+  }
+  .header {
+    background-color: #343a40;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .title {
+    font-size: 24px;
+  }
+  
+  .actions img {
+    margin-left: 10px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+  
+  .content {
+    padding: 20px;
+  }
+  input{
+    width: 93%;
+  }
+  .calculation-container{
+    width: 100%;
+    display: grid;
+    justify-content: center;
+    margin: auto;
+  }
+  .result_submit{
+    width: 400px;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+  }
+  

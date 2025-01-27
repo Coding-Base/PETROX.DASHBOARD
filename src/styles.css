@@ -1,0 +1,71 @@
+/* General Styles */
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  
+  /* Container Styles */
+  .container {
+    width: 400px;
+    background: #fff;
+    padding: 20px 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+  }
+  
+  /* Form Styles */
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Heading Styles */
+  h2 {
+    margin-bottom: 20px;
+    color: #007bff;
+  }
+  
+  /* Dashboard Styles */
+  .dashboard-container {
+    text-align: left;
+  }
+  
+  .dashboard-container h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .dashboard-container p {
+    font-size: 18px;
+    margin: 5px 0;
+  }
+  
