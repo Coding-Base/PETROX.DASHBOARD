@@ -19,7 +19,8 @@ const Signup = () => {
         password,
       });
       alert("Account created successfully");
-      navigate("/");
+      // Redirect to the login page after successful signup
+      navigate("/login");
     } catch (error) {
       alert("Error creating account, ensure there is no spacing between your username");
     }
@@ -29,8 +30,6 @@ const Signup = () => {
     <div className="container">
       <img className="petroxlogo" src={image} alt="petroxlogo" />
       <h2 style={{ fontSize: "40px", fontWeight: "400" }}>Create an Account</h2>
-      {/* <div className="triangle"></div><div className="square"></div> */}
-      
       <p>
         By using our services, you agree to our <strong>Terms</strong> and{" "}
         <strong>Privacy Statement</strong>.
@@ -38,7 +37,7 @@ const Signup = () => {
       <form onSubmit={handleSignup}>
         <input
           type="text"
-          placeholder="Username"  // Changed from "Full Name" to "Username"
+          placeholder="Username" 
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
@@ -56,9 +55,8 @@ const Signup = () => {
         />
         <input type="password" placeholder=" Confirm Password" />
         <p className="message"></p>
-        {/* <div className="square"></div> */}
         <p>
-          Already have an account? <Link to="/">Sign in</Link>.
+          Already have an account? <Link to="/login">Sign in</Link>.
         </p>
         <button style={{ width: "100%" }} type="submit">
           Create Account
@@ -88,9 +86,7 @@ const Signup = () => {
         </svg>
       </div>
       <div className="triangle-small"></div>
-      {/* <div className="triangle small"></div> */}
       <div className="square"></div>
-      {/* <div className="rectangle"></div> */}
       <div className="square"></div>
     </div>
   );
