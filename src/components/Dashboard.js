@@ -98,7 +98,7 @@ const Dashboard = () => {
         navigate("/");
       }
       try {
-        const response = await axios.get("http://localhost:8000/api/user/", {
+        const response = await axios.get("https://petrox-dashboard-backend.onrender.com/api/user/", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUserData(response.data);
