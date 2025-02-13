@@ -58,10 +58,10 @@ const Login = () => {
 <div className="circle small"></div>
 <div className="triangle"></div>
 <div className="sign-triangle" ></div>
-<div className="vector"><svg width="46" height="36" viewBox="0 0 46 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+{/* <div className="vector"><svg width="46" height="36" viewBox="0 0 46 36" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M3 18L43 18M3 18L14.4286 3M3 18L14.4286 33" stroke="black" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
-</div>
+</div> */}
 <div className="square"></div>
     </div>
   );

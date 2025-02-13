@@ -68,7 +68,7 @@ const Signup = () => {
       <div className="circle medium"></div>
       <div className="circle small"></div>
       <div className="triangle"></div>
-      <div className="vector">
+      {/* <div className="vector">
         <svg
           width="46"
           height="36"
@@ -84,7 +84,7 @@ const Signup = () => {
             strokeLinejoin="round"
           />
         </svg>
-      </div>
+      </div> */}
       <div className="triangle-small"></div>
       <div className="square"></div>
       <div className="square"></div>
