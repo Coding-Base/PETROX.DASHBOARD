@@ -79,7 +79,7 @@ const Dashboard = () => {
   const [selectedCalculation, setSelectedCalculation] = useState("");
   const [parameters, setParameters] = useState({});
   const [result, setResult] = useState(null);
-  const [activeSection, setActiveSection] = useState("dashboard"); // controls which section is visible
+  const [activeSection, setActiveSection] = useState("dashboard"); // Options: dashboard, calculation, gpCalculator, reports, settings, calendar, projects
   const [darkMode, setDarkMode] = useState(false);
   const navigate = useNavigate();
 
@@ -113,6 +113,15 @@ const Dashboard = () => {
     fetchUserData();
   }, [navigate]);
 
+  // Early return to avoid accessing properties of null
+  if (!userData) {
+    return (
+      <div className="container">
+        <p>Loading...</p>
+      </div>
+    );
+  }
+
   // Logout handler
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -131,7 +140,6 @@ const Dashboard = () => {
   };
 
   const handleProjectsClick = () => {
-    // Navigate to projects page or implement folder creation logic
     navigate("/projects");
   };
 
@@ -157,7 +165,11 @@ const Dashboard = () => {
         calculatedResult = (Math.PI / 4) * parsedParams.diameter ** 2 * parsedParams.length;
         break;
       case "Oil-in-Place Calculations":
-        calculatedResult = parsedParams.area * parsedParams.thickness * parsedParams.porosity * (1 - parsedParams.saturation);
+        calculatedResult =
+          parsedParams.area *
+          parsedParams.thickness *
+          parsedParams.porosity *
+          (1 - parsedParams.saturation);
         break;
       case "Gas-in-Place Calculations":
         calculatedResult = parsedParams.volume / (parsedParams.zFactor * parsedParams.temperature);
@@ -292,12 +304,7 @@ const Dashboard = () => {
                     onChange={handleParameterChange}
                   />
                 ))}
-                <button
-                  className="result_submit"
-                  onClick={handleRunCalculation}
-                  type="button"
-                  style={{ margin: "10px" }}
-                >
+                <button className="result_submit" onClick={handleRunCalculation} type="button" style={{ margin: "10px" }}>
                   Calculate
                 </button>
                 {result && (
@@ -321,25 +328,19 @@ const Dashboard = () => {
                   type="text"
                   placeholder={`Course ${index + 1} Name`}
                   value={courseObj.course}
-                  onChange={(e) =>
-                    handleGpCourseChange(index, "course", e.target.value)
-                  }
+                  onChange={(e) => handleGpCourseChange(index, "course", e.target.value)}
                   style={{ flex: "2", padding: "8px" }}
                 />
                 <input
                   type="number"
                   placeholder="Units"
                   value={courseObj.unit}
-                  onChange={(e) =>
-                    handleGpCourseChange(index, "unit", e.target.value)
-                  }
+                  onChange={(e) => handleGpCourseChange(index, "unit", e.target.value)}
                   style={{ flex: "1", padding: "8px" }}
                 />
                 <select
                   value={courseObj.grade}
-                  onChange={(e) =>
-                    handleGpCourseChange(index, "grade", e.target.value)
-                  }
+                  onChange={(e) => handleGpCourseChange(index, "grade", e.target.value)}
                   style={{ flex: "1", padding: "8px" }}
                 >
                   <option value="">Grade</option>
@@ -421,6 +422,7 @@ const Dashboard = () => {
           </div>
         );
       case "projects":
+        // Redirecting to projects page
         handleProjectsClick();
         return null;
       default:
@@ -439,13 +441,7 @@ const Dashboard = () => {
       {/* Sidebar */}
       <div className="sidebar">
         <div className="profile">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            height="48px"
-            viewBox="0 -960 960 960"
-            width="48px"
-            fill="#FFFFFF"
-          >
+          <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#FFFFFF">
             <path d="M222-255q63-44 125-67.5T480-346q71 0 133.5 23.5T739-255q44-54 62.5-109T820-480q0-145-97.5-242.5T480-820q-145 0-242.5 97.5T140-480q0 61 19 116t63 109Zm257.81-195q-57.81 0-97.31-39.69-39.5-39.68-39.5-97.5 0-57.81 39.69-97.31 39.68-39.5 97.5-39.5 57.81 0 97.31 39.69 39.5 39.68 39.5 97.5 0 57.81-39.69 97.31-39.68 39.5-97.5 39.5Zm.66 370Q398-80 325-111.5t-127.5-86q-54.5-54.5-86-127.27Q80-397.53 80-480.27 80-563 111.5-635.5q31.5-72.5 86-127t127.27-86q72.76-31.5 155.5-31.5 82.73 0 155.23 31.5 72.5 31.5 127 86t86 127.03q31.5 72.53 31.5 155T848.5-325q-31.5 73-86 127.5t-127.03 86Q562.94-80 480.47-80Zm-.47-60q55 0 107.5-16T691-212q-51-36-104-55t-107-19q-54 0-107 19t-104 55q51 40 103.5 56T480-140Zm0-370q34 0 55.5-21.5T557-587q0-34-21.5-55.5T480-664q-34 0-55.5 21.5T403-587q0 34 21.5 55.5T480-510Zm0-77Zm0 374Z" />
           </svg>
           <div className="info">
@@ -454,133 +450,50 @@ const Dashboard = () => {
           </div>
         </div>
         <div className="menu">
-          <a
-            href="#dashboard"
-            className="menu-item"
-            onClick={() => setActiveSection("dashboard")}
-          >
-            <svg
-              style={{ marginRight: "5px" }}
-              xmlns="http://www.w3.org/2000/svg"
-              height="24px"
-              viewBox="0 -960 960 960"
-              width="24px"
-              fill="#FFFFFF"
-            >
+          <a href="#dashboard" className="menu-item" onClick={() => setActiveSection("dashboard")}>
+            <svg style={{ marginRight: "5px" }} xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF">
               <path d="M520-600v-240h320v240H520ZM120-440v-400h320v400H120Zm400 320v-400h320v400H520Zm-400 0v-240h320v240H120Zm80-400h160v-240H200v240Zm400 320h160v-240H600v240Zm0-480h160v-80H600v80ZM200-200h160v-80H200v80Zm160-320Zm240-160Zm0 240ZM360-280Z" />
             </svg>{" "}
             Dashboard
           </a>
-          <a
-            href="#projects"
-            className="menu-item"
-            onClick={() => setActiveSection("projects")}
-          >
-            <svg
-              style={{ marginRight: "5px" }}
-              xmlns="http://www.w3.org/2000/svg"
-              height="24px"
-              viewBox="0 -960 960 960"
-              width="24px"
-              fill="#FFFFFF"
-            >
+          <a href="#projects" className="menu-item" onClick={() => setActiveSection("projects")}>
+            <svg style={{ marginRight: "5px" }} xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF">
               <path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h240l80 80h320q33 0 56.5 23.5T880-640H447l-80-80H160v480l96-320h684L837-217q-8 26-29.5 41.5T760-160H160Zm84-80h516l72-240H316l-72 240Zm0 0 72-240-72 240Zm-84-400v-80 80Z" />
             </svg>{" "}
             Projects
           </a>
-          <a
-            href="#calendar"
-            className="menu-item"
-            onClick={() => setActiveSection("calendar")}
-          >
-            <svg
-              style={{ marginRight: "5px" }}
-              xmlns="http://www.w3.org/2000/svg"
-              height="24px"
-              viewBox="0 -960 960 960"
-              width="24px"
-              fill="#FFFFFF"
-            >
+          <a href="#calendar" className="menu-item" onClick={() => setActiveSection("calendar")}>
+            <svg style={{ marginRight: "5px" }} xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF">
               <path d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-840h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Zm280 240q-17 0-28.5-11.5T440-440q0-17 11.5-28.5T480-480q17 0 28.5 11.5T520-440q0 17-11.5 28.5T480-400Zm-160 0q-17 0-28.5-11.5T280-440q0-17 11.5-28.5T320-480q17 0 28.5 11.5T360-440q0 17-11.5 28.5T320-400Zm320 0q-17 0-28.5-11.5T600-440q0-17 11.5-28.5T640-480q17 0 28.5 11.5T680-440q0 17-11.5 28.5T640-400ZM480-240q-17 0-28.5-11.5T440-280q0-17 11.5-28.5T480-320q17 0 28.5 11.5T520-280q0 17-11.5 28.5T480-240Zm-160 0q-17 0-28.5-11.5T280-280q0-17 11.5-28.5T320-320q17 0 28.5 11.5T360-280q0 17-11.5 28.5T320-240Zm320 0q-17 0-28.5-11.5T600-280q0-17 11.5-28.5T640-320q17 0 28.5 11.5T680-280q0 17-11.5 28.5T640-240Z" />
             </svg>{" "}
             Calendar
           </a>
-          <a
-            href="#gp-calculator"
-            className="menu-item"
-            onClick={() => {
-              setActiveSection("gpCalculator");
-            }}
-          >
+          <a href="#gp-calculator" className="menu-item" onClick={() => setActiveSection("gpCalculator")}>
             <svg style={{ paddingRight: "5px" }} xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF">
               <path d="M200-160v-80h560v80H200Zm0-140-51-321q-2 0-4.5.5t-4.5.5q-25 0-42.5-17.5T80-680q0-25 17.5-42.5T140-740q25 0 42.5 17.5T200-680q0 7-1.5 13t-3.5 11l125 56 125-171q-11-8-18-21t-7-28q0-25 17.5-42.5T480-880q25 0 42.5 17.5T540-820q0 15-7 28t-18 21l125 171 125-56q-2-5-3.5-11t-1.5-13q0-25 17.5-42.5T820-740q25 0 42.5 17.5T880-680q0 25-17.5 42.5T820-620q-2 0-4.5-.5t-4.5-.5l-51 321H200Zm68-80h424l26-167-105 46-133-183-133 183-105-46 26 167Zm212 0Z" />
             </svg>
             G P Calculator
           </a>
-          <a
-            href="#reports"
-            className="menu-item"
-            onClick={() => setActiveSection("reports")}
-          >
-            <svg
-              style={{ marginRight: "5px" }}
-              xmlns="http://www.w3.org/2000/svg"
-              height="24px"
-              viewBox="0 -960 960 960"
-              width="24px"
-              fill="#FFFFFF"
-            >
+          <a href="#reports" className="menu-item" onClick={() => setActiveSection("reports")}>
+            <svg style={{ marginRight: "5px" }} xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF">
               <path d="M200-120v-680h360l16 80h224v400H520l-16-80H280v280h-80Zm300-440Zm86 160h134v-240H510l-16-80H280v240h290l16 80Z" />
             </svg>{" "}
             Reports
           </a>
-          <a
-            href="#settings"
-            className="menu-item"
-            onClick={() => setActiveSection("settings")}
-          >
-            <svg
-              style={{ marginRight: "5px" }}
-              xmlns="http://www.w3.org/2000/svg"
-              height="24px"
-              viewBox="0 -960 960 960"
-              width="24px"
-              fill="#FFFFFF"
-            >
+          <a href="#settings" className="menu-item" onClick={() => setActiveSection("settings")}>
+            <svg style={{ marginRight: "5px" }} xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF">
               <path d="m438-338 226-226-57-57-169 169-84-84-57 57 141 141Zm42 258q-139-35-229.5-159.5T160-516v-244l320-120 320 120v244q0 152-90.5 276.5T480-80Zm0-84q104-33 172-132t68-220v-189l-240-90-240 90v189q0 121 68 220t172 132Zm0-316Z" />
             </svg>{" "}
             Setting
           </a>
-          <a
-            href="#logout"
-            className="menu-item"
-            onClick={handleLogout}
-          >
-            <svg
-              style={{ marginRight: "5px" }}
-              xmlns="http://www.w3.org/2000/svg"
-              height="24px"
-              viewBox="0 -960 960 960"
-              width="24px"
-              fill="#FFFFFF"
-            >
+          <a href="#logout" className="menu-item" onClick={handleLogout}>
+            <svg style={{ marginRight: "5px" }} xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF">
               <path d="M200-120v-680h360l16 80h224v400H520l-16-80H280v280h-80Zm300-440Zm86 160h134v-240H510l-16-80H280v240h290l16 80Z" />
             </svg>{" "}
             Logout
           </a>
-          <a
-            href="#dark-mode"
-            className="menu-item"
-            onClick={handleToggleDarkMode}
-          >
-            <svg
-              style={{ marginRight: "5px" }}
-              xmlns="http://www.w3.org/2000/svg"
-              height="24px"
-              viewBox="0 -960 960 960"
-              width="24px"
-              fill="#FFFFFF"
-            >
+          <a href="#dark-mode" className="menu-item" onClick={handleToggleDarkMode}>
+            <svg style={{ marginRight: "5px" }} xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF">
               <path d="M480 960q-75 0-141-28.5T239 875q-17-12-2.5-31.5T258 833q48 27 108 27 64 0 116-44t58-106q0-64-42-106.5T480 556q-60 0-102 42T336 700q0 60 42 102t102 42q49 0 87-26.5t58-68.5q11-29-12.5-43.5T480 804q-42 0-71-29t-29-71q0-42 29-71t71-29q33 0 56.5 17t33.5 44q8 21-10.5 34.5T480 636q-30 0-51 21t-21 51q0 30 21 51t51 21q36 0 57-28t21-66q0-45-27-69.5T480 456q-37 0-63.5 26T390 556q0 37 26.5 63.5t63.5 26.5q45 0 69.5-27t24.5-64q0-45-24.5-73T480 396q-46 0-75.5 29T375 500q0 46 29.5 75t75.5 29q45 0 74.5-29T608 500q0-46-29-75T480 396Z" />
             </svg>
             Dark Mode
@@ -595,7 +508,6 @@ const Dashboard = () => {
           <button onClick={handleRunCalculationsClick} type="button">
             RUN CALCULATIONS
           </button>
-          {/* Additional dark mode toggle button could be added here if desired */}
         </div>
         {renderContent()}
       </div>
@@ -604,3 +516,4 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
