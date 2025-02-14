@@ -15,6 +15,7 @@ body, html {
   height: 100vh;
   width: 100%;
   font-family: 'Inter', sans-serif;
+  position: relative;
 }
 
 /* Sidebar Styling */
@@ -27,8 +28,26 @@ body, html {
   flex-direction: column;
   align-items: center;
   padding: 20px 0;
+  transition: transform 0.3s ease;
 }
 
+/* When sidebar is hidden on mobile */
+.sidebar.hidden {
+  transform: translateX(-100%);
+}
+
+/* When sidebar is active on mobile */
+.sidebar.active {
+  transform: translateX(0);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 70%;
+  height: 100%;
+  z-index: 1000;
+}
+
+/* Profile & Menu */
 .profile {
   text-align: center;
   margin-bottom: 40px;
@@ -75,6 +94,24 @@ body, html {
 
 .icon {
   margin-right: 15px;
+}
+
+/* Burger Icon for Mobile */
+.burger {
+  display: none;
+  cursor: pointer;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  z-index: 1100;
+}
+
+.burger div {
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  margin: 5px 0;
+  transition: all 0.3s ease;
 }
 
 /* Main Content Styling */
@@ -163,16 +200,54 @@ input {
   margin: auto;
 }
 
+/* Additional GP Calculator Styles */
+.gp-calculator-container {
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.gp-course-row {
+  margin-bottom: 15px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.gp-course-row input,
+.gp-course-row select {
+  padding: 8px;
+  flex: 1;
+}
+
+.gp-result {
+  margin: 10px;
+  padding: 10px;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+}
+
 /* Responsive Styles */
 @media (max-width: 768px) {
   .dashboard {
     flex-direction: column;
   }
   
+  /* Hide sidebar by default on mobile */
   .sidebar {
-    width: 100%;
-    min-width: 100%;
-    padding: 10px 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 70%;
+    height: 100%;
+    z-index: 1000;
+    transform: translateX(-100%);
+  }
+  
+  /* Show burger icon on mobile */
+  .burger {
+    display: block;
   }
   
   .main-content {
@@ -207,32 +282,4 @@ input {
     font-size: 14px;
     padding: 10px 15px;
   }
-}
-
-/* Additional GP Calculator Styles */
-.gp-calculator-container {
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  margin-top: 20px;
-}
-
-.gp-course-row {
-  margin-bottom: 15px;
-  display: flex;
-  gap: 10px;
-  align-items: center;
-}
-
-.gp-course-row input,
-.gp-course-row select {
-  padding: 8px;
-  flex: 1;
-}
-
-.gp-result {
-  margin: 10px;
-  padding: 10px;
-  background-color: #f0f0f0;
-  border-radius: 5px;
 }
