@@ -8,10 +8,12 @@ const Signup = () => {
   const [username, setUsername] = useState("");  // Changed from fullName to username
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSignup = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       await axios.post("https://petrox-dashboard-backend.onrender.com/api/signup/", {
         username,  // Send username here
@@ -24,10 +26,33 @@ const Signup = () => {
     } catch (error) {
       alert("Error creating account, ensure there is no spacing between your username");
     }
+    setLoading(false);
   };
 
   return (
     <div className="container">
+      {loading && (
+        <div style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          backgroundColor: "rgba(0, 0, 0, 0.5)",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          zIndex: 9999,
+        }}>
+          <div style={{
+            color: "#fff",
+            fontSize: "2rem",
+            fontWeight: "bold",
+          }}>
+            Loading...
+          </div>
+        </div>
+      )}
       <img className="petroxlogo" src={image} alt="petroxlogo" />
       <h2 style={{ fontSize: "40px", fontWeight: "400" }}>Create an Account</h2>
       <p>
@@ -37,7 +62,7 @@ const Signup = () => {
       <form onSubmit={handleSignup}>
         <input
           type="text"
-          placeholder="Username" 
+          placeholder="Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
@@ -68,23 +93,6 @@ const Signup = () => {
       <div className="circle medium"></div>
       <div className="circle small"></div>
       <div className="triangle"></div>
-      {/* <div className="vector">
-        <svg
-          width="46"
-          height="36"
-          viewBox="0 0 46 36"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M3 18L43 18M3 18L14.4286 3M3 18L14.4286 33"
-            stroke="black"
-            strokeWidth="5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      </div> */}
       <div className="triangle-small"></div>
       <div className="square"></div>
       <div className="square"></div>
